@@ -13,6 +13,7 @@ pipeline {
                 sh '''
                     sudo ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/mynewkey root@192.168.0.108 '
                     FLASK_PID=$(sudo ps -ef | grep myapp.py | grep -v grep | awk "{print \$2}");
+                    echo "FLASK_PID: $FLASK_PID";  # Debug statement
                     if [ ! -z "$FLASK_PID" ]; then
                         sudo kill -9 $FLASK_PID;
                         echo "Stopped running Flask app with PID: $FLASK_PID";
